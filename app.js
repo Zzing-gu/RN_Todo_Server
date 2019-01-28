@@ -59,8 +59,8 @@ async function getAll() {
 
     
 
-    for (let index = 3; index < cells.length; index++) {
-        var tmp = {row: index ,data: '' , task: '', done:false}
+    for (let index = 3; index < 55; index++) {
+        var tmp = {row: index ,date: '' , task: '', done:false}
 
         for (const cell of cells) {
             
