@@ -50,11 +50,37 @@ async function getAll() {
         'max-col': 3,
         'return-empty': true,
     })
-    for (const cell of cells) {
-        console.log(`${cell.row},${cell.col}: ${cell.value}`)
+    // for (const cell of cells) {
+    //     console.log(`${cell.row},${cell.col}: ${cell.value}`)
+    // }
+
+
+    var newCells = [];
+
+    
+
+    for (let index = 3; index < cells.length; index++) {
+        var tmp = {row: index ,data: '' , task: '', done:false}
+
+        for (const cell of cells) {
+            
+            if(cell.row == index){
+                if(cell.col == 1) {
+                    tmp.date = cell.value;
+                } else if(cell.col ==2) {
+                    tmp.task = cell.value;
+                } else if(cell.col ==3) {
+                    tmp.done = cell.value;
+                }
+            }
+        }
+        
+        newCells.push(tmp);
     }
 
-    return cells;
+    var jsonCells = {cells : newCells}
+
+    return newCells;
 }
 
 async function insert(row ,date, task, done) {
@@ -106,7 +132,7 @@ async function delrow(row) {
 
     cellDate.value = "";
     cellTask.value = "";
-    cellDone.value = false;
+    cellDone.value = "";
 
     await sheet.bulkUpdateCells(cells);
 
@@ -122,7 +148,7 @@ app.get('/all', function (req, res) {
    
     const cells = async () => {
         const cells = await getAll();
-        console.log(cells[0].value);
+        
 
         
 
