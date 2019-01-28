@@ -1,6 +1,14 @@
 var express = require('express');
 var app = express();
 
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const morgan = require('morgan');
+
+app.use(morgan('tiny'));
+app.use(cors());
+
+
 const GoogleSpreadsheet = require('google-spreadsheet')
 const { promisify } = require('util')
 
@@ -144,9 +152,9 @@ app.get('/delete', function (req, res) {
 
 
 
-
-app.listen(57767, function () {
-  console.log('Example app listening on port 3000!');
+const port = process.env.PORT || 1234
+app.listen(port, function () {
+  console.log(`Example app listening on port ${port}!`);
 });
 
 
